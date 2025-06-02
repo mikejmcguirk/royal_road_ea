@@ -20,8 +20,22 @@ def get_fitness(a, str_len):
 def get_winners(population, cnt_pop):
     winners = []
     while len(population) >= 2:
-        random.shuffle(population)
+        # scores = [get_fitness(p, str_len) for p in population]
+        # if sum(scores) > 0:
+        #     a = random.choices(population, weights=scores, k=1)[0]
+        # else:
+        #     a = random.choice(population)
+        #
+        # candidates = [p for p in population if p is not a]
+        # other_scores = [get_fitness(c, str_len) for c in candidates]
+        #
+        # if sum(other_scores) > 0:
+        #     weights = [1 / score if score > 0 else len(a) for score in other_scores]
+        #     b = random.choices(candidates, weights=weights, k=1)[0]
+        # else:
+        #     b = random.choice(candidates)
 
+        random.shuffle(population)
         a, b = population[0], population[1]
 
         if get_fitness(a, str_len) >= get_fitness(b, str_len):
@@ -95,6 +109,7 @@ for _ in range(generations):
         this_pct = this_fitness / best_fitness
         to_subtract = this_pct * (max_mutation - min_mutation)
         mutation_rate = max_mutation - to_subtract
+        mutation_rate = 0.01
 
         for j in range(0, len(new_population[i])):
             do_mutation = random.random()
